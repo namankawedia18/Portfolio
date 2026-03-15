@@ -1,3 +1,32 @@
+// ── Loader
+const loader     = document.getElementById('loader');
+const loaderBar  = document.getElementById('loaderBar');
+const loaderText = document.getElementById('loaderText');
+
+const loadSteps = [
+  { pct: 20,  text: 'Initializing...' },
+  { pct: 45,  text: 'Loading Assets...' },
+  { pct: 70,  text: 'Building UI...' },
+  { pct: 90,  text: 'Almost Ready...' },
+  { pct: 100, text: 'Welcome.' },
+];
+
+let step = 0;
+const loaderInterval = setInterval(() => {
+  if (step < loadSteps.length) {
+    loaderBar.style.width  = loadSteps[step].pct + '%';
+    loaderText.textContent = loadSteps[step].text;
+    step++;
+  }
+}, 300);
+
+window.addEventListener('load', () => {
+  clearInterval(loaderInterval);
+  loaderBar.style.width  = '100%';
+  loaderText.textContent = 'Welcome.';
+  setTimeout(() => loader.classList.add('hide'), 600);
+});
+
 // ── Navbar: solid background on scroll
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
